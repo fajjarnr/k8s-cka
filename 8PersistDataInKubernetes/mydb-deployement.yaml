@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydb
+  labels:
+    app: mydbd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mydbd
+  template:
+    metadata:
+      labels:
+        app: mydbd
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: rahasia
+        volumeMounts:
+          - name: db-data
+            mountPath: "/var/lib/mysql"
+      volumes:
+        - name: db-data
+          persistentVolumeClaim:
+            claimName: mysql-data-pvc

@@ -1,0 +1,23 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: null
+  name: cicd-role
+  namespace: default
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - services
+  verbs:
+  - create
+  - list
+  - update
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - create
+  - list
+  - update
